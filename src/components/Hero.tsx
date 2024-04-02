@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="w-[65%] mx-auto herobg bg-cover bg-center bg-no-repeat">
+    <div className="w-[65%] mx-auto herobg bg-cover bg-center bg-no-repeat overflow-hidden">
       <div className="mx-auto flex justify-between py-16 px-16">
         <div className="flex flex-col items-start justify-center flex-1 gap-10">
           <Image

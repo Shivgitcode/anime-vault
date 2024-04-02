@@ -1,16 +1,40 @@
+"use client";
+
 import AnimeCard from "@/components/AnimeCard";
 import { data } from "../_data";
+import { useEffect, useState } from "react";
+import Spinner from "@/components/Spinner";
 
 export default function Anime() {
-  return (
+  const [animes, setAnimes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://shikimori.one/api/animes?limit=8&order=popularity`
+      );
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setAnimes(data);
+      }
+    };
+    fetchData();
+    setLoading(false);
+  }, []);
+  return loading ? (
+    <Spinner></Spinner>
+  ) : (
     <div className=" p-[64px]">
       <div className=" w-[70%]  mx-auto">
         <p className=" text-white font-bold text-[30px] leading-[36px] my-[30px]">
           Explore Anime
         </p>
         <div className="flex flex-row flex-wrap items-center gap-10 justify-center">
-          {data.map((el) => {
-            return <AnimeCard el={el}></AnimeCard>;
+          {animes.map((el, idx) => {
+            return <AnimeCard el={el} idx={idx}></AnimeCard>;
           })}
         </div>
       </div>

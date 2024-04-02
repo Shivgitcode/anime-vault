@@ -5,6 +5,7 @@ interface AnimeProp {
   name: string;
   image: {
     original: string;
+    preview: string;
   };
   kind: string;
   episodes: number;
@@ -12,15 +13,19 @@ interface AnimeProp {
   score: string;
 }
 
-export default function AnimeCard({ el }: { el: AnimeProp }) {
+export default function AnimeCard({ el, idx }: { el: AnimeProp; idx: number }) {
   return (
     <div className="flex flex-col items-start justify-start">
       <div className="w-[258px]">
-        <img src={el.image.original} alt="" className="rounded-xl" />
+        <img
+          src={`https://shikimori.one${el.image.original}`}
+          alt="not avaiblable"
+          className="rounded-xl"
+        />
       </div>
       <div className="flex flex-col items-start justify-center py-[16px] w-full gap-1">
         <div className="flex text-white w-full justify-between">
-          <p className="text-[20px] leading-[28px] font-bold capitalize flex-1">
+          <p className="text-[20px] leading-[28px] font-bold capitalize flex-1 max-w-[200px]">
             {el.name}
           </p>
           <div className="bg-[#161921] text-[13px] leading-[24px] font-bold py-1 px-2 rounded-sm">
